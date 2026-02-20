@@ -1,4 +1,4 @@
-Ask AI
+
 
 const express = require("express");
 const http = require("http");
@@ -71,11 +71,14 @@ io.on("connection", (socket) => {
         console.log("User disconnected");
 
     });
-    
+
+
 
 });
 
-const PORT= process.env.PORT || 4000;
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    const PORT= process.env.PORT || 4000;
+server.listen(4000, () => {
+
+    console.log("Server running on http://localhost:4000");
+
 });

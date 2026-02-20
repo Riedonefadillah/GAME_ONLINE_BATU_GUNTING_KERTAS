@@ -1,4 +1,3 @@
-
 const socket = io();
 
 let playerNumber = 0;
