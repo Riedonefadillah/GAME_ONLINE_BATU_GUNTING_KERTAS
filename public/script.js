@@ -1,13 +1,11 @@
 const socket = io();
 
 const username = localStorage.getItem("username");
-if(!username) {
+if (!username) {
     window.location.href = "login.html";
 }
 
 socket.emit("join", username);
-
-// informasi player
 
 let playerNumber = 0;
 let myChoice = null;
@@ -20,7 +18,8 @@ socket.on("playerNumber", (number) => {
 socket.on("roomFull", () => {
     alert("Maaf, Ruangan sudah penuh!");
 });
-    // Element selector
+
+// Element selector
 const playerDisplay = document.getElementById("playerDisplay");
 const computerDisplay = document.getElementById("computerDisplay");
 const hasil = document.getElementById("hasil");
@@ -33,22 +32,17 @@ const computerScoreEl = document.getElementById("computerScore");
 let playerScore = 0;
 let computerScore = 0;
 
-// button click
-
+// Button click
 buttons.forEach(button => {
     button.addEventListener("click", function () {
         myChoice = this.id;
-
         hasil.textContent = "Menunggu lawan memilih...";
-
         socket.emit("choice", myChoice);
     });
 });
 
-// receive result
-
+// Receive result
 socket.on("result", (data) => {
-
     battleArea.classList.add("active");
 
     const isPlayer1 = playerNumber === 1;
@@ -59,8 +53,8 @@ socket.on("result", (data) => {
     const myName = isPlayer1 ? data.p1Name : data.p2Name;
     const opponentName = isPlayer1 ? data.p2Name : data.p1Name;
 
-    playerDisplay.textContent =`${myName} : ${getIcon(myChoiceResult)}`;
-    computerDisplay.textContent =`${opponentName} : ${getIcon(opponentChoiceResult)}`;
+    playerDisplay.textContent = `${myName} : ${getIcon(myChoiceResult)}`;
+    computerDisplay.textContent = `${opponentName} : ${getIcon(opponentChoiceResult)}`;
 
     let resultText = "";
 
