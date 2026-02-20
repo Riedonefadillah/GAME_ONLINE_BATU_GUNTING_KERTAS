@@ -16,8 +16,7 @@ let choices = {};
 let usernames = {};
 
 function determineWinner(p1, p2) {
-    if (!p1 || !p2) return null;
-
+    if(!p1 || !p2) return null;
     if (p1 === p2) return "seri";
 
     if (
@@ -34,45 +33,48 @@ function determineWinner(p1, p2) {
 io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
 
-    socket.on("join", (username) => {
-        usernames[socket.id] = username;
+    // Batasi max 2 player
+    if(players.length < 2){
+        players.push(socket.id);
+        socket.emit("playerNumber", players.length);
+    } else {
+        socket.emit("roomFull");
+        return;
+    }
 
-        if (players.length < 2) {
-            players.push(socket.id);
-            socket.emit("playerNumber", players.length);
-        } else {
-            socket.emit("roomFull");
-        }
+    // Terima nama
+    socket.on("join", (username) => {
+        usernames[socket.id] = username;        console.log(`${username} joined`);
     });
 
+    // Terima choice
     socket.on("choice", (choice) => {
         choices[socket.id] = choice;
 
-        if (players.length === 2 && Object.keys(choices).length === 2) {
+        if(players.length === 2 && Object.keys(choices).length === 2){
             const [p1, p2] = players;
-
             const p1Choice = choices[p1];
             const p2Choice = choices[p2];
 
             const result = determineWinner(p1Choice, p2Choice);
 
             io.emit("result", {
-                p1Choice : p1Choice,
-                p2Choice: p2Choice,
+                p1Choice,
+                p2Choice,
                 result,
                 p1Name: usernames[p1],
                 p2Name: usernames[p2]
             });
 
+            // Reset untuk ronde berikutnya
             choices = {};
         }
     });
 
+    // Disconnect
     socket.on("disconnect", () => {
         console.log("User disconnected:", socket.id);
-
         players = players.filter(id => id !== socket.id);
-
         delete choices[socket.id];
         delete usernames[socket.id];
 
@@ -81,6 +83,7 @@ io.on("connection", (socket) => {
     });
 
 });
+
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
