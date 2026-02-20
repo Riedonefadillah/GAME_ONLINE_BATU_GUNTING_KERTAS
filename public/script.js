@@ -1,4 +1,13 @@
 const socket = io();
+const joinBtn = document.getElementById("joinBtn"); 
+
+joinBtn.addEventListener("click", () =>{
+    const usernameInput = document.getElementById("username").value;
+    if(usernameInput.trim() !== ""){
+        localStorage.setItem("username", usernameInput);
+    };
+    window.location.href = "index.html";
+})
 
 const username = localStorage.getItem("username");
 if (!username) {

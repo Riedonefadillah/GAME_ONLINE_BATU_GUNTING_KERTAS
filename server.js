@@ -44,7 +44,8 @@ io.on("connection", (socket) => {
 
     // Terima nama
     socket.on("join", (username) => {
-        usernames[socket.id] = username;        console.log(`${username} joined`);
+        usernames[socket.id] = username;       
+         console.log(`${username} joined`);
     });
 
     // Terima choice
