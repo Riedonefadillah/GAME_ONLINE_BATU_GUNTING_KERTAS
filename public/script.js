@@ -3,10 +3,13 @@ const joinBtn = document.getElementById("joinBtn");
 
 joinBtn.addEventListener("click", () =>{
     const usernameInput = document.getElementById("username").value;
-    if(usernameInput.trim() !== ""){
+    if(usernameInput.trim() === ""){
+         alert("Username harus diisi!");
+    }else{
         localStorage.setItem("username", usernameInput);
-    };
-    window.location.href = "index.html";
+        window.location.href = "index.html";
+
+    }
 })
 
 const username = localStorage.getItem("username");
