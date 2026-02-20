@@ -56,8 +56,8 @@ socket.on("result", (data) => {
     const myChoiceResult = isPlayer1 ? data.p1Choice : data.p2Choice;
     const opponentChoiceResult = isPlayer1 ? data.p2Choice : data.p1Choice;
 
-    const myName = isPlayer ? data.p1Name : data.p2Name;
-    const opponentName = isPlayer ? data.p2Name : data.p1Name;
+    const myName = isPlayer1 ? data.p1Name : data.p2Name;
+    const opponentName = isPlayer1 ? data.p2Name : data.p1Name;
 
     playerDisplay.textContent =`${myName} : ${getIcon(myChoiceResult)}`;
     computerDisplay.textContent =`${opponentName} : ${getIcon(opponentChoiceResult)}`;
