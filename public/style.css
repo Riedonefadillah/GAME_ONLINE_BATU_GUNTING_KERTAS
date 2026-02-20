@@ -1,3 +1,4 @@
+
 * {
             margin: 0;
             padding: 0;
@@ -413,39 +414,4 @@
                 font-size: 1.5rem;
             }
         }
-
-        /* LOGIN */
-
-        .login-box{
-            width: 100%;
-            max-width:350px;
-            margin: 100px auto;
-            background-color: #2f2f4f;
-            padding: 25px;
-            border-radius:12px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-        .login-box h2{
-            margin-bottom: 20px;
-        }
-        .login-box input{
-            width:100%;
-            padding: 10px;
-            margin:10px 0;
-            border-radius:8px;
-            border:none;
-        }
-        .login-box button{
-            width:100%;
-            padding: 10px;
-            background-color: #667eea;
-            color:#fff;
-            border:none;
-            border-radius:8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .login-box button:hover{
-            background-color: #764ba2;
-        }
+                

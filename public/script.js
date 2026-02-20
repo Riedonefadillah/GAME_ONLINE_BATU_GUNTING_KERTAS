@@ -1,23 +1,5 @@
+
 const socket = io();
-// const joinBtn = document.getElementById("joinBtn"); 
-
-// joinBtn.addEventListener("click", () =>{
-//     const usernameInput = document.getElementById("username").value;
-//     if(usernameInput.trim() === ""){
-//          alert("Username harus diisi!");
-//     }else{
-//         localStorage.setItem(username, usernameInput);
-        // window.location.href = "index.html";
-
-//     }
-// })
-
-const username = localStorage.getItem("username");
-if (!username) {
-    window.location.href = "login.html";
-}
-
-socket.emit("join", username);
 
 let playerNumber = 0;
 let myChoice = null;
@@ -31,7 +13,6 @@ socket.on("roomFull", () => {
     alert("Maaf, Ruangan sudah penuh!");
 });
 
-// Element selector
 const playerDisplay = document.getElementById("playerDisplay");
 const computerDisplay = document.getElementById("computerDisplay");
 const hasil = document.getElementById("hasil");
@@ -44,16 +25,13 @@ const computerScoreEl = document.getElementById("computerScore");
 let playerScore = 0;
 let computerScore = 0;
 
-// Button click
 buttons.forEach(button => {
     button.addEventListener("click", function () {
         myChoice = this.id;
-        hasil.textContent = "Menunggu lawan memilih...";
         socket.emit("choice", myChoice);
     });
 });
 
-// Receive result
 socket.on("result", (data) => {
     battleArea.classList.add("active");
 
@@ -62,11 +40,8 @@ socket.on("result", (data) => {
     const myChoiceResult = isPlayer1 ? data.p1Choice : data.p2Choice;
     const opponentChoiceResult = isPlayer1 ? data.p2Choice : data.p1Choice;
 
-    const myName = isPlayer1 ? data.p1Name : data.p2Name;
-    const opponentName = isPlayer1 ? data.p2Name : data.p1Name;
-
-    playerDisplay.textContent = `${myName} : ${getIcon(myChoiceResult)}`;
-    computerDisplay.textContent = `${opponentName} : ${getIcon(opponentChoiceResult)}`;
+    playerDisplay.textContent = getIcon(myChoiceResult);
+    computerDisplay.textContent = getIcon(opponentChoiceResult);
 
     let resultText = "";
 
