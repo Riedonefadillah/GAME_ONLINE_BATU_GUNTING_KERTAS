@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Batu Gunting Kertas Online</title>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="game-container">
+        <h1>🎮 Batu Gunting Kertas</h1>
+        <p class="subtitle">Pilih salah satu untuk bermain!</p>
+
+        <div class="score-board">
+            <div class="score-box">
+                <div class="score-label">Kamu</div>
+                <div class="score-value" id="playerScore">0</div>
+            </div>
+            <div class="score-box">
+                <div class="score-label">Lawan</div>
+                <div class="score-value" id="computerScore">0</div>
+            </div>
+        </div>
+
+        <p id="status">Siap bermain? Pilih batu, gunting, atau kertas!</p>
+
+        <div class="choices-container" id="choices">
+            <button class="choice-btn" id="batu" >
+                <span class="choice-icon">✊</span>
+                <span class="choice-label">Batu</span>
+            </button>
+            <button class="choice-btn" id="gunting">
+                <span class="choice-icon">✌️</span>
+                <span class="choice-label">Gunting</span>
+            </button>
+            <button class="choice-btn" id="kertas">
+                <span class="choice-icon">✋</span>
+                <span class="choice-label">Kertas</span>
+            </button>
+        </div>
+
+        <div class="battle-area" id="battleArea">
+            <div class="player-choice">
+                <div class="choice-display" id="playerDisplay">✊</div>
+                <div class="player-label">Kamu</div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="computer-choice">
+                <div class="choice-display" id="computerDisplay">✊</div>
+                <div class="computer-label">lawan</div>
+            </div>
+        </div>
+
+        <p id="hasil">Hasil akan muncul di sini</p>
+
+        <button class="reset-btn" onclick="resetGame()">🔄 Main Lagi</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
